@@ -4,6 +4,7 @@ import argparse
 import os.path
 import sys
 import re
+import csv
 
 from run_blast import Blastn
 from run_blast import At_least_part_seq_aligned
@@ -50,7 +51,12 @@ if __name__=="__main__":
     percentage = 50.0
     similarity = At_least_part_seq_aligned(percentage)
     similar_seq_ids = blastn.find_similar_seq_ids(similarity)
-    split_fasta_files_on_seq_ids(
+    summary = split_fasta_files_on_seq_ids(
         similar_seq_ids, args.fasta_files, 
         shared_seq_fasta, unique_seq_fasta)
-
+    print "Summary is written to summary.tsv file." 
+    print "The format of the summary.tsv file is: filename    n_total    n_shared    n_unique." 
+    print "tab is used as column separator." 
+    with open("summary.tsv", "w") as s:
+        summary_fh = csv.writer(s, delimiter="\t")
+        summary_fh.writerow(summary)
