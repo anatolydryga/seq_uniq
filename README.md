@@ -6,7 +6,7 @@ and 2 files for sequences that are similar between original FASTA files.
 ## How to run
 
 ``` bash
-./seq_uniq seq1.fasta seq2.fasta 
+./seq_uniq.py seq1.fasta seq2.fasta 
 ```
 
 creates 4 files:
